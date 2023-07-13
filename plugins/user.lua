@@ -9,4 +9,6 @@ return {
   --     require("lsp_signature").setup()
   --   end,
   -- },
+  { "sainnhe/everforest" },
+  { "github/copilot" },
 }

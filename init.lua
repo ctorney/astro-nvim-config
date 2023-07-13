@@ -1,3 +1,7 @@
+
+vim.g.everforest_transparent_background = 2
+vim.g.everforest_background = "hard"
+
 return {
   -- Configure AstroNvim updates
   updater = {
@@ -18,7 +22,7 @@ return {
   },
 
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  colorscheme = "everforest",
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
@@ -81,5 +85,11 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    vim.cmd[[
+    augroup NEOTREE_AUGROUP
+      autocmd!
+      au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
+    augroup END
+    ]]
   end,
 }
