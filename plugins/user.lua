@@ -10,5 +10,9 @@ return {
   --   end,
   -- },
   { "sainnhe/everforest" },
-  { "github/copilot" },
+  {"luk400/vim-jukit"},
+  {"github/copilot.vim",
+event = "InsertEnter",
+autoStart = true,
+},
 }

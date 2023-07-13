@@ -1,6 +1,7 @@
 
 vim.g.everforest_transparent_background = 2
 vim.g.everforest_background = "hard"
+vim.g.copilot_assume_mapped = true
 
 return {
   -- Configure AstroNvim updates
@@ -28,7 +29,7 @@ return {
   diagnostics = {
     virtual_text = true,
     underline = true,
-  },
+    },
 
   lsp = {
     -- customize lsp formatting options
