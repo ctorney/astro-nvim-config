@@ -1,4 +1,3 @@
-
 vim.g.everforest_transparent_background = 2
 vim.g.everforest_background = "hard"
 vim.g.copilot_assume_mapped = true
@@ -59,6 +58,24 @@ return {
     },
   },
 
+   -- Disable default plugins
+  enabled = {
+    cmp = false,
+    bufferline = false,
+    neo_tree = true,
+    lualine = false,
+    gitsigns = true,
+    colorizer = true,
+    toggle_term = true,
+    comment = true,
+    symbols_outline = true,
+    indent_blankline = true,
+    dashboard = true,
+    which_key = true,
+    neoscroll = true,
+    ts_rainbow = true,
+    ts_autotag = true,
+  },
   -- Configure require("lazy").setup() options
   lazy = {
     defaults = { lazy = true },
@@ -92,5 +109,15 @@ return {
       au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
     augroup END
     ]]
+    
+    --vim.api.nvim_exec([[1ToggleTerm
+    --                    2ToggleTerm]], true)
+
+ --   vim.cmd[[
+  --  augroup TERMINAL_AUGROUP
+   --   autocmd!
+    --  au VimEnter * lua vim.defer_fn(function() vim.cmd("0ToggleTerm") end, 10)
+     -- augroup END
+    --]]
   end,
 }
