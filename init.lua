@@ -109,15 +109,26 @@ return {
       au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
     augroup END
     ]]
-    
-    --vim.api.nvim_exec([[1ToggleTerm
-    --                    2ToggleTerm]], true)
-
- --   vim.cmd[[
-  --  augroup TERMINAL_AUGROUP
-   --   autocmd!
-    --  au VimEnter * lua vim.defer_fn(function() vim.cmd("0ToggleTerm") end, 10)
-     -- augroup END
-    --]]
+    vim.api.nvim_create_autocmd("QuitPre", {callback = function()
+      local invalid_win = {}
+      local wins = vim.api.nvim_list_wins()
+      for _, w in ipairs(wins) do
+        local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
+        if bufname:match("NvimTree_") ~= nil then
+          table.insert(invalid_win, w)
+        end
+      end
+      if #invalid_win == #wins - 1 then
+        -- Should quit, so we close all invalid windows.
+        for _, w in ipairs(invalid_win) do vim.api.nvim_win_close(w, true) end
+        local handle = io.popen("wezterm cli get-pane-direction Right")
+        local result = (handle:read("*a"):gsub("^%s*(.-)%s*$", "%1"))
+        handle:close()
+        local args = { "cli", "kill-pane" }
+        table.insert(args, "--pane-id")
+        table.insert(args, result)
+        vim.loop.spawn("wezterm", {args=args}) 
+      end
+    end})
   end,
 }
