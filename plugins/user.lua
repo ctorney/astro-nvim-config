@@ -1,18 +1,10 @@
 return {
-  -- You can also add new plugins here as well:
-  -- Add plugins, the lazy syntax
-  -- "andweeb/presence.nvim",
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("lsp_signature").setup()
-  --   end,
-  -- },
   {"sainnhe/everforest"},
   {"github/copilot.vim",
-    event = "InsertEnter",
-    autoStart = true,
+    event = "InsertEnter"
+  },
+  {"famiu/bufdelete.nvim",
+    cmd = {"Bdelete", "Bwipeout"}
   },
   {
     "rcarriga/nvim-notify",
@@ -31,33 +23,15 @@ return {
     },
     config = require "plugins.configs.notify",
   },
-  --{
-  --  "michaelb/sniprun",
-  --   build = "bash ./install.sh 1",
-  --   cmd = "SnipRun",
-  --   config = function()
-  --      require("sniprun").setup({display = { "Terminal" },})
-  --   end,
-  --},
-  --  keys = {},
-  --  opts = {},
-  --  cmd = "SnipRun",
-  --  config = function()
-  --    require("sniprun").setup(display = { "Terminal" })
-  --  end,
-  --},
   {"jpalardy/vim-slime", 
     ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
     config = function()
       vim.g.slime_target = "wezterm"
-      vim.g.slime_default_config = {socket_name="default", pane_id="0"}
-      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_config = {socket_name="default", pane_id="1"}
+      vim.g.slime_dont_ask_default = 0
       vim.g.slime_bracketed_paste = 1
       vim.g.slime_no_mappings = 1
     end,
-    
-
-
 },
   {
   'klafyvel/vim-slime-cells',
@@ -66,8 +40,8 @@ return {
   config=function ()
     vim.g.slime_target = "wezterm"
     vim.g.slime_cell_delimiter = "^\\s*##"
-    vim.g.slime_default_config = {socket_name="default", target_pane="0"}
-    vim.g.slime_dont_ask_default = 1
+    vim.g.slime_default_config = {socket_name="default", pane_id="1"}
+    vim.g.slime_dont_ask_default = 0
     vim.g.slime_bracketed_paste = 1
    vim.g.slime_no_mappings = 1
     vim.cmd([[

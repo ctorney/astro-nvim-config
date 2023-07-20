@@ -2,6 +2,7 @@ vim.g.everforest_transparent_background = 2
 vim.g.everforest_background = "hard"
 vim.g.copilot_assume_mapped = true
 
+local functions = require('user.functions')
 return {
   -- Configure AstroNvim updates
   updater = {
@@ -40,7 +41,7 @@ return {
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-          -- "python",
+           "python",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
@@ -87,28 +88,16 @@ return {
     },
   },
 
-  -- This function is run last and is a good place to configuring
-  -- augroups/autocommands and custom filetypes also this just pure lua so
-  -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
+    -- set up the file tree to open on startup
     vim.cmd[[
     augroup NEOTREE_AUGROUP
       autocmd!
-      au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
+      au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left reveal_force_cwd") end, 10)
     augroup END
     ]]
+
+    -- set the file tree to close if it's the last window open - maybe this is no longer needed?
     vim.api.nvim_create_autocmd("QuitPre", {callback = function()
       local invalid_win = {}
       local wins = vim.api.nvim_list_wins()
@@ -121,14 +110,17 @@ return {
       if #invalid_win == #wins - 1 then
         -- Should quit, so we close all invalid windows.
         for _, w in ipairs(invalid_win) do vim.api.nvim_win_close(w, true) end
-        local handle = io.popen("wezterm cli get-pane-direction Right")
-        local result = (handle:read("*a"):gsub("^%s*(.-)%s*$", "%1"))
-        handle:close()
-        local args = { "cli", "kill-pane" }
-        table.insert(args, "--pane-id")
-        table.insert(args, result)
-        vim.loop.spawn("wezterm", {args=args}) 
-      end
+        --require('wezterm').close_pane()
+      end      
     end})
+
+    -- close all the panes if we quit neovim
+    vim.api.nvim_create_autocmd("ExitPre", {callback = function()
+      functions.close_pane()
+    end})
+    
+    -- set up the commands for python and wezterm
+    vim.api.nvim_create_user_command('Ipython', functions.ipython, {bang = true, nargs = '?'})
+    vim.api.nvim_create_user_command('Wezterm', functions.wterm, {bang = true})
   end,
 }
