@@ -7,6 +7,13 @@ return {
     cmd = {"Bdelete", "Bwipeout"}
   },
   {
+    'numToStr/Comment.nvim',
+    ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
+    config = function()
+        require('Comment').setup()
+    end
+  },
+  {
     "rcarriga/nvim-notify",
     init = function() require("astronvim.utils").load_plugin_with_func("nvim-notify", vim, "notify") end,
     opts = {
@@ -24,6 +31,7 @@ return {
     config = require "plugins.configs.notify",
   },
   {"jpalardy/vim-slime", 
+    lazy = false,
     ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
     config = function()
       vim.g.slime_target = "wezterm"

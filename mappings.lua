@@ -19,6 +19,7 @@ return {
       end,
       desc = "Pick to close",
     },
+    ["<ESC>"] = {""},
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
@@ -43,6 +44,6 @@ return {
   },
   t = {
     -- setting a mapping to false will disable it
-    -- ["<esc>"] = false,
+     ["<esc>"] = false,
   },
 }
