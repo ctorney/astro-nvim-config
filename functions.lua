@@ -23,7 +23,7 @@ function M.ipython(args)
     table.insert(args, ipython_pane)
     vim.loop.spawn("wezterm", {args=args}) 
   else
-    local cmdstring = [[wezterm cli split-pane --percent 30 --right -- ipython -i -c 'import matplotlib;matplotlib.use("module://matplotlib-backend-sixel");matplotlib.rc("figure", figsize=(5, 4))']]
+    local cmdstring = [[wezterm cli split-pane --percent 30 --right -- ipython -i -c 'import matplotlib;matplotlib.use("module://matplotlib-backend-sixel");matplotlib.rc("figure", figsize=(5, 4));from qbstyles import mpl_style;mpl_style("dark")' ]]
     local handle = io.popen(cmdstring)
     ipython_pane = (handle:read("*a"):gsub("^%s*(.-)%s*$", "%1"))
     -- create a vim function for setting the slime config so that it points to the correct pane

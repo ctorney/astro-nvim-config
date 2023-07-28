@@ -1,7 +1,17 @@
 return {
   {"sainnhe/everforest"},
   {"github/copilot.vim",
-    event = "InsertEnter"
+    event = "InsertEnter",
+    config = function()
+      vim.cmd([[
+        imap <silent> <C-p> <Plug>(copilot-prev)
+        imap <silent> <C-n> <Plug>(copilot-next)
+        imap <silent> <C-d> <Plug>(copilot-dismiss)
+        ]]
+      )
+    end,
+
+
   },
   {"famiu/bufdelete.nvim",
     cmd = {"Bdelete", "Bwipeout"}
@@ -51,8 +61,10 @@ return {
     vim.g.slime_default_config = {socket_name="default", pane_id="1"}
     vim.g.slime_dont_ask_default = 0
     vim.g.slime_bracketed_paste = 1
-   vim.g.slime_no_mappings = 1
+    vim.g.slime_no_mappings = 1
     vim.cmd([[
+    nmap <C-CR> <Plug>SlimeCellsSendAndGoToNext
+    imap <C-CR> <C-o><Plug>SlimeCellsSendAndGoToNext
     nmap <leader>cv <Plug>SlimeConfig
     nmap <leader>cc <Plug>SlimeCellsSendAndGoToNext
     nmap <leader>cj <Plug>SlimeCellsNext
