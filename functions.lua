@@ -48,4 +48,17 @@ function M.wterm()
   return
 end
 
+function M.pudb() 
+  local filename = vim.fn.expand('%')
+  local pathname = vim.fn.expand('%:p:h')
+  local args = { "cli", "spawn", "--cwd"}
+  table.insert(args, pathname)
+  table.insert(args, "--")
+  table.insert(args, "python")
+  table.insert(args, "-m")
+  table.insert(args, "pudb")
+  table.insert(args, filename)
+  vim.loop.spawn("wezterm", {args=args}) 
+  return
+end
 return M
