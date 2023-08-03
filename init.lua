@@ -122,5 +122,6 @@ return {
     -- set up the commands for python and wezterm
     vim.api.nvim_create_user_command('Ipython', functions.ipython, {bang = true, nargs = '?'})
     vim.api.nvim_create_user_command('Wezterm', functions.wterm, {bang = true})
+    vim.api.nvim_create_user_command('Debugger', functions.pudb, {bang = true})
   end,
 }
