@@ -38,6 +38,21 @@ function M.ipython(args)
   return
 end
 
+function M.ipython_window() 
+  local cmdstring = [[wezterm cli spawn --new-window -- ipython -i -c 'import matplotlib;matplotlib.use("module://matplotlib-backend-sixel");matplotlib.rc("figure", figsize=(8, 5));from qbstyles import mpl_style;mpl_style("dark")' ]]
+  local handle = io.popen(cmdstring)
+  ipython_pane = (handle:read("*a"):gsub("^%s*(.-)%s*$", "%1"))
+  -- create a vim function for setting the slime config so that it points to the correct pane
+  vim.api.nvim_exec([[
+  function! SlimeOverrideConfig()
+  let b:slime_config = {}
+  let b:slime_config["pane_id"] = ]] .. ipython_pane .. [[ 
+  endfunction]], false)
+  -- set the slime config
+  vim.api.nvim_exec([[:SlimeConfig]], false)  
+  return
+end
+
 function M.wterm() 
   -- create a new wezterm pane and set the NVIM environment variable to the servername
   -- so that we can use nvr to send buffers to the current nvim instance
@@ -51,7 +66,7 @@ end
 function M.pudb() 
   local filename = vim.fn.expand('%')
   local pathname = vim.fn.expand('%:p:h')
-  local args = { "cli", "spawn", "--cwd"}
+  local args = { "cli", "spawn", "--new-window", "--cwd"}
   table.insert(args, pathname)
   table.insert(args, "--")
   table.insert(args, "python")

@@ -1,6 +1,7 @@
 vim.g.everforest_transparent_background = 2
 vim.g.everforest_background = "hard"
 vim.g.copilot_assume_mapped = true
+vim.g.python3_host_prog = 'python'
 
 local functions = require('user.functions')
 return {
@@ -146,6 +147,7 @@ return {
     
     -- set up the commands for python and wezterm
     vim.api.nvim_create_user_command('Ipython', functions.ipython, {bang = true, nargs = '?'})
+    vim.api.nvim_create_user_command('IpythonWindow', functions.ipython_window, {bang = true})
     vim.api.nvim_create_user_command('Wezterm', functions.wterm, {bang = true})
     vim.api.nvim_create_user_command('Debugger', functions.pudb, {bang = true})
   end,
