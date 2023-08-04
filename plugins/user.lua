@@ -1,28 +1,55 @@
 return {
   {"sainnhe/everforest"},
-  {"github/copilot.vim",
-    event = "InsertEnter",
-    config = function()
-      vim.cmd([[
-        imap <silent> <C-p> <Plug>(copilot-prev)
-        imap <silent> <C-n> <Plug>(copilot-next)
-        imap <silent> <C-d> <Plug>(copilot-dismiss)
-        ]]
-      )
-    end,
+  -- {"github/copilot.vim",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     vim.cmd([[
+  --       imap <silent> <C-p> <Plug>(copilot-prev)
+  --       imap <silent> <C-n> <Plug>(copilot-next)
+  --       imap <silent> <C-d> <Plug>(copilot-dismiss)
+  --       ]]
+  --     )
+  --   end,
+  -- },
 
-
+  {
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+      suggestion = {enabled = true, 
+                      auto_trigger = true,
+                      keymap = {
+                        accept = "<S-Right>",
+                        accept_word = "<M-Right>",
+                        accept_line = false,
+                        next = "<M-]>",
+                        prev = "<M-[>",
+                        dismiss = "<C-c>"},
+                      },
+      panel = { enabled = true },
+    })
+  end,
   },
+--   {
+--   "zbirenbaum/copilot-cmp",
+--   config = function ()
+--     require("copilot_cmp").setup()
+--   end
+-- },
+
+
   {"famiu/bufdelete.nvim",
     cmd = {"Bdelete", "Bwipeout"}
   },
-  {
-    'numToStr/Comment.nvim',
-    ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
-    config = function()
-        require('Comment').setup()
-    end
-  },
+  -- {
+  --   -- 'numToStr/Comment.nvim',
+  --   ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
+  --   config = function()
+  --       require('Comment').setup()
+  --   end
+  -- },
   {
     "rcarriga/nvim-notify",
     init = function() require("astronvim.utils").load_plugin_with_func("nvim-notify", vim, "notify") end,
@@ -72,4 +99,6 @@ return {
     ]])
   end
   },
+
+
 }

@@ -61,7 +61,7 @@ return {
 
    -- Disable default plugins
   enabled = {
-    cmp = false,
+    cmp = true,
     bufferline = false,
     neo_tree = true,
     lualine = false,
@@ -76,6 +76,31 @@ return {
     neoscroll = true,
     ts_rainbow = true,
     ts_autotag = true,
+  },
+
+  plugins = {
+    { -- override nvim-cmp plugin
+      "hrsh7th/nvim-cmp",
+      -- override the options table that is used in the `require("cmp").setup()` call
+      opts = function(_, opts)
+        -- opts parameter is the default options table
+        -- the function is lazy loaded so cmp is able to be required
+        local cmp = require "cmp"
+        -- modify the mapping part of the table
+        -- opts.mapping["<C-x>"] = cmp.mapping.select_next_item()
+
+        opts.sources = cmp.config.sources {
+           -- { name = "copilot", group_index = 2 },
+    -- Other Sources
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "path", group_index = 2 },
+          { name = "luasnip", group_index = 2 },
+          { name = "buffer", group_index = 2 },
+        }
+        -- return the new table to be used
+        return opts
+      end,
+    },
   },
   -- Configure require("lazy").setup() options
   lazy = {
