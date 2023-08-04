@@ -10,6 +10,7 @@ return {
     -- mappings seen under group name "Buffer"
     ["<leader>w"] = { "<cmd>Wezterm<cr>", desc = "New Wezterm terminal" },
     ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
+    ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
     ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
     ["<C-]>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     ["<C-[>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
@@ -21,6 +22,7 @@ return {
     },
     -- create key mapping to map alt-f4 to close current buffer
     ["<C-c>"] = { "<cmd>w|Bdelete<cr>", desc = "Close current buffer" },
+    ["<leader>l"] = { "<cmd>SlimeSendCurrentLine<cr>", desc = "Send current line" },
 
     ["<ESC>"] = {""},
     -- tables with the `name` key will be registered with which-key if it's installed
@@ -37,6 +39,7 @@ return {
     ["<C-j>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
     ["<C-k>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
     ["<C-l>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
+    ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
   },
   i = {
     -- Smart Splits

@@ -19,7 +19,7 @@ return {
   config = function()
     require("copilot").setup({
       suggestion = {enabled = true, 
-                      auto_trigger = false,
+                      auto_trigger = true,
                       keymap = {
                         accept = "<S-Right>",
                         accept_word = "<M-Right>",
@@ -98,7 +98,9 @@ return {
     vim.g.slime_bracketed_paste = 1
     vim.g.slime_no_mappings = 1
     vim.cmd([[
+    nmap <S-CR> <Plug>SlimeCellsSendAndGoToNext
     nmap <C-CR> <Plug>SlimeCellsSendAndGoToNext
+    imap <S-CR> <C-o><Plug>SlimeCellsSendAndGoToNext
     imap <C-CR> <C-o><Plug>SlimeCellsSendAndGoToNext
     nmap <leader>cv <Plug>SlimeConfig
     nmap <leader>cc <Plug>SlimeCellsSendAndGoToNext
