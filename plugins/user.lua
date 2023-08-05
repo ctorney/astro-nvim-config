@@ -21,8 +21,8 @@ return {
       suggestion = {enabled = true, 
                       auto_trigger = true,
                       keymap = {
-                        accept = "<Right>",
-                        accept_word = "<S-Right>",
+                        accept = "<S-Right>",
+                        accept_word = "<M-Right>",
                         accept_line = false,
                         next = "<S-Down>",
                         prev = "<S-Up>",

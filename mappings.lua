@@ -22,7 +22,8 @@ return {
     },
     -- create key mapping to map alt-f4 to close current buffer
     ["<C-c>"] = { "<cmd>w|Bdelete<cr>", desc = "Close current buffer" },
-    ["<leader>l"] = { "<cmd>SlimeSendCurrentLine<cr>", desc = "Send current line" },
+    ["<leader>sl"] = { "<cmd>SlimeSendCurrentLine<cr>", desc = "Send current line" },
+    ["<leader>sf"] = { "<cmd>%SlimeSend<cr>", desc = "Send current file" },
 
     ["<ESC>"] = {""},
     -- tables with the `name` key will be registered with which-key if it's installed
