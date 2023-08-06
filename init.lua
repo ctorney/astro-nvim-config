@@ -140,6 +140,8 @@ return {
       end      
     end})
 
+    vim.g.guicursor = ""
+
     -- close all the panes if we quit neovim
     vim.api.nvim_create_autocmd("ExitPre", {callback = function()
       functions.close_pane()

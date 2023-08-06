@@ -40,7 +40,7 @@ return {
     ["<C-j>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
     ["<C-k>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
     ["<C-l>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
-    ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
+    -- ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
   },
   i = {
     -- Smart Splits
