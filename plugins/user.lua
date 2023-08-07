@@ -30,8 +30,7 @@ return {
       {'MunifTanjim/nui.nvim'}
     },
     config = function()
-      vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>')
-      vim.keymap.set('n', '<C-f>', ':SearchBoxIncSearch<CR>')
+      vim.keymap.set('n', '<C-f>', ':SearchBoxMatchAll<CR>')
       vim.keymap.set('n', '<C-r>', ':SearchBoxReplace<CR>')
     end
   },
