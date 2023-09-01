@@ -1,5 +1,12 @@
 return {
   {"sainnhe/everforest"},
+  {"stevearc/vim-arduino",
+    ft = {'arduino'},
+    config = function()
+      vim.g.arduino_autoformat_on_save = 1
+    end
+  },
+
   -- {"github/copilot.vim",
   --   event = "InsertEnter",
   --   config = function()
@@ -105,10 +112,10 @@ return {
     lazy = false,
     ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
     config = function()
-      vim.g.slime_target = "wezterm"
-      vim.g.slime_config = {socket_name="default", pane_id="1"}
-      vim.g.slime_dont_ask_default = 0
-      vim.g.slime_bracketed_paste = 1
+      vim.g.slime_target = "tmux"
+      vim.g.slime_config = {socket_name="default", target_pane="{right}"}
+      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_bracketed_paste = 0
       vim.g.slime_no_mappings = 1
     end,
   },
@@ -118,11 +125,11 @@ return {
     requires = {{'jpalardy/vim-slime', opt=true}},
     ft = {'python','ipython'},
     config=function ()
-      vim.g.slime_target = "wezterm"
+      vim.g.slime_target = "tmux"
       vim.g.slime_cell_delimiter = "^\\s*##"
-      vim.g.slime_default_config = {socket_name="default", pane_id="1"}
-      vim.g.slime_dont_ask_default = 0
-      vim.g.slime_bracketed_paste = 1
+      vim.g.slime_default_config = {socket_name="default", target_pane="{right}"}
+      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_bracketed_paste = 0
       vim.g.slime_no_mappings = 1
       vim.cmd([[
         nmap <S-CR> <Plug>SlimeCellsSendAndGoToNext
