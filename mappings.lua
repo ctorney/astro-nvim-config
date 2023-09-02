@@ -8,12 +8,13 @@ return {
   n = {
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
-    ["<leader>w"] = { "<cmd>Wezterm<cr>", desc = "New Wezterm terminal" },
-    ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
-    ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
-    ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
-    ["<C-]>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
-    ["<C-[>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
+    -- ["<leader>w"] = { "<cmd>Wezterm<cr>", desc = "New Wezterm terminal" },
+    -- ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
+    -- ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
+    -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
+    ["]"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["<leader>bD"] = {
       function()
         require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)
