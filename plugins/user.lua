@@ -4,6 +4,13 @@ return {
     ft = {'arduino'},
     config = function()
       vim.g.arduino_autoformat_on_save = 1
+      vim.cmd([[
+        nmap <leader>au <Plug>ArduinoUpload
+        nmap <leader>ac <Plug>ArduinoCompile
+        nmap <leader>as <Plug>ArduinoSerial
+        nmap <leader>av <Plug>ArduinoVerify
+
+        ]])
     end
   },
 
@@ -64,7 +71,7 @@ return {
             jump_next = "]]",
             accept = "<CR>",
             refresh = "gr",
-            open = "<M-Down>"
+            open = "<C-p>"
           },
         },
       })
@@ -143,5 +150,31 @@ return {
         ]])
     end
   },
+
+  {
+    'lervag/vimtex',
+    ft = {'tex'},
+    config = function ()
+      vim.g.vimtex_view_method = 'zathura'
+      vim.cmd([[
+      nmap <leader>vc :VimtexCompile<CR>
+      nmap <leader>vv :VimtexView<CR>
+      ]])
+    end
+  },
+
+  -- {
+  --   'dmadisetti/airlatex.vim',
+  --   lazy = false,
+  --   cmd = {"AirLatex", "AirLatexStop", "AirLatexToggle"},
+  --   -- event = "InsertEnter",
+  --   config = function ()
+  --     vim.g.AirLatexCookieDB = "/home/ctorney/snap/firefox/common/.mozilla/firefox/w9ewhbb7.default-release/cookies.sqlite"
+  --     -- vim.g.AirLatexCookie = "cookies:_ga=GA1.2.198190938.1587589289"
+  --     -- vim.g.AirLatexCookieKey = "_ga"
+  --     vim.g.AirLatexLogLevel = "DEBUG"
+  --     vim.g.AirLatexLogFile = "/tmp/airlatex.log"
+  --   end
+  -- },
 
 }

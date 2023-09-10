@@ -8,7 +8,7 @@ return {
   -- Configure AstroNvim updates
   updater = {
     remote = "origin", -- remote to use
-    channel = "stable", -- "stable" or "nightly"
+    channel = "nightly", -- "stable" or "nightly"
     version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
     branch = "nightly", -- branch name (NIGHTLY ONLY)
     commit = nil, -- commit hash (NIGHTLY ONLY)
@@ -64,7 +64,7 @@ return {
   enabled = {
     cmp = true,
     bufferline = false,
-    neo_tree = true,
+    neo_tree = false,
     lualine = false,
     gitsigns = true,
     colorizer = true,
@@ -115,13 +115,14 @@ return {
   },
 
   polish = function()
-    -- set up the file tree to open on startup
-    vim.cmd[[
-    augroup NEOTREE_AUGROUP
-      autocmd!
-      au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left reveal_force_cwd") end, 10)
-    augroup END
-    ]]
+
+    -- -- set up the file tree to open on startup
+    -- vim.cmd[[
+    -- augroup NEOTREE_AUGROUP
+    --   autocmd!
+    --   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left reveal_force_cwd") end, 10)
+    -- augroup END
+    -- ]]
 
     -- set the file tree to close if it's the last window open - maybe this is no longer needed?
     vim.api.nvim_create_autocmd("QuitPre", {callback = function()
