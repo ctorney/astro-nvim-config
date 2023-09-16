@@ -12,9 +12,10 @@ return {
     -- ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
     -- ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
     -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
-    ["]"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
-    ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
+    -- ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["<leader>bD"] = {
       function()
         require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)

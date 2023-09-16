@@ -28,8 +28,13 @@ return {
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
-    virtual_text = true,
-    underline = true,
+    virtual_text = {true, severity = {min = vim.diagnostic.severity.ERROR}},
+    -- set severity of virtual text to error
+    -- severity = "INFO",
+    underline = false,
+    signs = {true, severity = {min = vim.diagnostic.severity.ERROR}},
+    -- signs = true,
+
     },
 
   lsp = {
@@ -42,7 +47,7 @@ return {
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-           "python",
+           -- "python",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
