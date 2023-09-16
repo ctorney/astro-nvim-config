@@ -29,11 +29,9 @@ return {
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = {true, severity = {min = vim.diagnostic.severity.ERROR}},
-    -- set severity of virtual text to error
-    -- severity = "INFO",
     underline = false,
     signs = {true, severity = {min = vim.diagnostic.severity.ERROR}},
-    -- signs = true,
+    update_in_insert = false,
 
     },
 

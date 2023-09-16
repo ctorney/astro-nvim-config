@@ -141,6 +141,8 @@ return {
       vim.cmd([[
         nmap <S-CR> <Plug>SlimeCellsSendAndGoToNext
         nmap <C-CR> <Plug>SlimeCellsSendAndGoToNext
+        xmap <S-CR> <Plug>SlimeRegionSend
+        xmap <C-CR> <Plug>SlimeRegionSend
         imap <S-CR> <C-o><Plug>SlimeCellsSendAndGoToNext
         imap <C-CR> <C-o><Plug>SlimeCellsSendAndGoToNext
         nmap <leader>cv <Plug>Slimeconfig
