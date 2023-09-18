@@ -44,6 +44,17 @@ return {
     ["<C-k>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
     ["<C-l>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
     -- ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
+    ["<C-g>"] = {
+		  c = { "<cmd>GpChatNew<cr>", "New Chat" },
+		  t = { "<cmd>GpChatToggle<cr>", "Toggle Popup Chat" },
+		  f = { "<cmd>GpChatFinder<cr>", "Chat Finder" },
+
+		  r = { "<cmd>GpRewrite<cr>", "Inline Rewrite" },
+		  a = { "<cmd>GpAppend<cr>", "Append" },
+		  b = { "<cmd>GpPrepend<cr>", "Prepend" },
+		  p = { "<cmd>GpPopup<cr>", "Popup" },
+		  s = { "<cmd>GpStop<cr>", "Stop" },
+	  },
   },
   i = {
     -- Smart Splits
@@ -56,4 +67,18 @@ return {
     -- setting a mapping to false will disable it
      ["<esc>"] = false,
   },
+  v = {
+    ["<C-g>"] = {
+		c = { ":<C-u>'<,'>GpChatNew<cr>", "Visual Chat New" },
+		t = { ":<C-u>'<,'>GpChatToggle<cr>", "Visual Popup Chat" },
+
+		r = { ":<C-u>'<,'>GpRewrite<cr>", "Visual Rewrite" },
+		a = { ":<C-u>'<,'>GpAppend<cr>", "Visual Append" },
+		b = { ":<C-u>'<,'>GpPrepend<cr>", "Visual Prepend" },
+		e = { ":<C-u>'<,'>GpExplain<cr>", "Visual Explain" },
+		p = { ":<C-u>'<,'>GpPopup<cr>", "Visual Popup" },
+		s = { "<cmd>GpStop<cr>", "Stop" },
+  },
+  }
+    
 }

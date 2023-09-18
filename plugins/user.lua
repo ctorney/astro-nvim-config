@@ -84,6 +84,26 @@ return {
   --   end
   -- },
 
+  {
+    "robitx/gp.nvim",
+    cmd = {"GpChatNew", "GpChatToggle", "GpChatFinder", "GpExplain"},
+    config = function()
+      require("gp").setup({
+        chat_user_prefix = "🗨",
+	      chat_assistant_prefix = "🤖",
+        hooks = {
+          Explain = function(gp, params)
+            local template = "I have the following code from {{filename}}:\n\n"
+            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+            .. "Please respond by explaining the code above."
+            gp.Prompt(params, gp.Target.popup, nil, gp.config.command_model,
+              template, gp.config.chat_system_prompt)
+          end,
+        }
+      })
+    end,
+  },
+
 
   {
     "famiu/bufdelete.nvim",
