@@ -14,7 +14,7 @@ return {
     -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
     ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
-    ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    -- ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     -- ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["<leader>bD"] = {
       function()
@@ -55,6 +55,7 @@ return {
 		  p = { "<cmd>GpPopup<cr>", "Popup" },
 		  s = { "<cmd>GpStop<cr>", "Stop" },
 	  },
+	  ["gt"] = {"<cmd>GpChatToggle<cr>", desc = "Toggle Popup Chat"},
   },
   i = {
     -- Smart Splits
@@ -68,6 +69,7 @@ return {
      ["<esc>"] = false,
   },
   v = {
+    ["<C-S-CR>"] = { "<Plug>SlimeRegionSend", desc = "Send current selection" },
     ["<C-g>"] = {
 		c = { ":<C-u>'<,'>GpChatNew<cr>", "Visual Chat New" },
 		t = { ":<C-u>'<,'>GpChatToggle<cr>", "Visual Popup Chat" },
