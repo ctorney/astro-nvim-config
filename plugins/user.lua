@@ -38,6 +38,16 @@ return {
   },
 
   {
+    'Lilja/zellij.nvim',
+    lazy = false,
+    enable = true,
+    config = function()
+      require("zellij").setup({
+        vimTmuxNavigatorKeyBinds = true,})
+    end
+  },
+
+  {
     'VonHeikemen/searchbox.nvim',
     lazy = false,
     requires = {
@@ -52,14 +62,14 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    event = "BufRead",
     config = function()
       require("copilot").setup({
         suggestion = {enabled = true, 
         auto_trigger = true,
           keymap = {
             accept = "<S-Right>",
-            accept_word = "<M-Right>",
+            accept_word = "<Ctrl-Right>",
             accept_line = false,
             next = "<S-Down>",
             prev = "<S-Up>",
@@ -133,16 +143,97 @@ return {
     },
     config = require "plugins.configs.notify",
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "BufRead",
+    config = function()
+      require("lualine").setup {
+	options = {
+		theme = "everforest",
+		component_separators = "|",
+		-- section_separators = { left = "", right = "" },
+	},
+	sections = {
+		lualine_a = { { "mode", right_padding = 2 } },
+		lualine_b = {  { "filename", path=2} },
+		lualine_c = { "hostname","branch", { "diff", colored = true } },
+		lualine_x = {"diagnostics"},
+		lualine_y = { "filetype", "progress" },
+		lualine_z = { { "location", left_padding = 2 } },
+	},
+	inactive_sections = {
+		lualine_a = { "filename" },
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	tabline = {
+		lualine_a = {
+			{
+				"buffers",
+				separator = { left = "", right = "" },
+				right_padding = 2,
+				symbols = { alternate_file = "" },
+			},
+		},
+	},
+}
+ --      -- LSP clients attached to buffer
+ --      require("lualine").setup({
+ --        options = {
+ --          theme = "everforest",
+ --          icons_enabled = true,
+ --          section_separators = {"", ""},
+ --          component_separators = {"", ""},
+ --          disabled_filetypes = {},
+ --        },
+ --        sections = {
+ --          lualine_a = {"mode"},
+ --          lualine_b = {"hostname"},
+ --          lualine_c = {{"filename",path=2}},
+ --          lualine_x = {"clients_lsp","encoding", "fileformat", "filetype"},
+	--
+ --          lualine_y = {"progress"},
+ --          lualine_z = {"location"},
+ --        },
+ --        inactive_sections = {
+ --          lualine_a = {},
+ --          lualine_b = {},
+ --          lualine_c = {"filename"},
+ --          lualine_x = {"location"},
+ --          lualine_y = {},
+ --          lualine_z = {},
+ --        },
+ --        tabline = {
+	-- 	lualine_a = {
+	-- 		{
+	-- 			"buffers",
+	-- 			separator = { left = "", right = "" },
+	-- 			right_padding = 2,
+	-- 			symbols = { alternate_file = "" },
+	-- 		},
+	-- 	},
+	-- },
+ --        extensions = {},
+ --      })
+    end,
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      opt = true,
+    },
+  },
 
   {
     "jpalardy/vim-slime", 
     lazy = false,
     ft = {'python', 'lua', 'sh', 'zsh', 'bash', 'ipython'},
     config = function()
-      vim.g.slime_target = "tmux"
-      vim.g.slime_config = {socket_name="default", target_pane="{right}"}
+      vim.g.slime_target = "zellij"
+      vim.g.slime_config = {session_id="current", relative_pane="right", relative_move_back="left"}
       vim.g.slime_dont_ask_default = 1
-      vim.g.slime_bracketed_paste = 0
+      vim.g.slime_bracketed_paste = 1
       vim.g.slime_no_mappings = 1
     end,
   },
@@ -152,9 +243,9 @@ return {
     requires = {{'jpalardy/vim-slime', opt=true}},
     ft = {'python','ipython'},
     config=function ()
-      vim.g.slime_target = "tmux"
+      vim.g.slime_target = "zellij"
       vim.g.slime_cell_delimiter = "^\\s*##"
-      vim.g.slime_default_config = {socket_name="default", target_pane="{right}"}
+      vim.g.slime_default_config = {session_id="current", relative_pane="right", relative_move_back="left"}
       vim.g.slime_dont_ask_default = 1
       vim.g.slime_bracketed_paste = 1
       vim.g.slime_no_mappings = 1

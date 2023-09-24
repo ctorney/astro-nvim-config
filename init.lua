@@ -66,9 +66,10 @@ return {
    -- Disable default plugins
   enabled = {
     cmp = true,
+    heirline = false,
     bufferline = false,
     neo_tree = false,
-    lualine = false,
+    lualine = true,
     gitsigns = true,
     colorizer = true,
     toggle_term = true,
@@ -88,7 +89,7 @@ return {
     performance = {
       rtp = {
         -- customize default disabled vim plugins
-        disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin" },
+        disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin"},
       },
     },
   },
