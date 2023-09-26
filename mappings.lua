@@ -14,7 +14,7 @@ return {
     -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
     ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
-    ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
+    -- ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     -- ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["<leader>bD"] = {
       function()
@@ -39,11 +39,11 @@ return {
     ["<C-Left>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" },
     ["<C-Down>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" },
     ["<C-Up>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" },
-    ["<C-h>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" },
-    ["<C-j>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
-    ["<C-k>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
-    ["<C-l>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
-    -- ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
+    -- ["<C-h>"] = { function() require("smart-splits").resize_up() end, desc = "Resize split up" },
+    -- ["<C-j>"] = { function() require("smart-splits").resize_down() end, desc = "Resize split down" },
+    -- ["<C-k>"] = { function() require("smart-splits").resize_left() end, desc = "Resize split left" },
+    -- ["<C-l>"] = { function() require("smart-splits").resize_right() end, desc = "Resize split right" },
+    -- -- ["<leader>fw"] = {function() require("telescope.builtin").find_files({search_dirs = {".", os.getenv("HOME") .. "/workspace"}})  end, desc = "Find workspace files" },
     ["<C-g>"] = {
 		  c = { "<cmd>GpChatNew<cr>", "New Chat" },
 		  t = { "<cmd>GpChatToggle<cr>", "Toggle Popup Chat" },
@@ -55,6 +55,7 @@ return {
 		  p = { "<cmd>GpPopup<cr>", "Popup" },
 		  s = { "<cmd>GpStop<cr>", "Stop" },
 	  },
+	  ["gt"] = {"<cmd>GpChatToggle<cr>", desc = "Toggle Popup Chat"},
   },
   i = {
     -- Smart Splits
@@ -68,6 +69,7 @@ return {
      ["<esc>"] = false,
   },
   v = {
+    ["<C-S-CR>"] = { "<Plug>SlimeRegionSend", desc = "Send current selection" },
     ["<C-g>"] = {
 		c = { ":<C-u>'<,'>GpChatNew<cr>", "Visual Chat New" },
 		t = { ":<C-u>'<,'>GpChatToggle<cr>", "Visual Popup Chat" },
