@@ -127,6 +127,14 @@ return {
     vim.api.nvim_create_autocmd("ExitPre", {callback = function()
       functions.close_pane()
     end})
+
+    vim.api.nvim_create_autocmd("BufEnter", {
+      callback = function()
+        vim.opt.formatoptions:remove { "c", "r", "o" }
+      end,
+      group = general,
+      desc = "Disable New Line Comment",
+    })
     
     -- set up the commands for python and wezterm
     vim.api.nvim_create_user_command('Ipython', functions.ipython, {bang = true, nargs = '?'})
