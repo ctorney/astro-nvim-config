@@ -12,6 +12,8 @@ return {
     -- ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
     -- ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
     -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
+    -- map shift-u to redo
+    ["U"] = { "<cmd>redo<cr>", desc = "Redo" },
     ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     -- ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },

@@ -66,10 +66,10 @@ return {
    -- Disable default plugins
   enabled = {
     cmp = true,
-    heirline = false,
+    heirline = true,
     bufferline = false,
     neo_tree = false,
-    lualine = true,
+    lualine = false,
     gitsigns = true,
     colorizer = true,
     toggle_term = true,
