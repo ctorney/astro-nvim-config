@@ -30,6 +30,12 @@ return {
     ["<C-S-CR>"] = { "<cmd>SlimeSendCurrentLine<cr><cr>", desc = "Send current line" },
     ["<leader>sf"] = { "<cmd>%SlimeSend<cr>", desc = "Send current file" },
 
+    -- add a key mapping for HopWord with the prefix "Hop"
+    ["<leader>h"] = { name = "", desc = "Hop" },
+    ["<leader>hw"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
+    ["<leader>hl"] = {"<cmd>HopLine<cr>", desc = "Hop to line"},
+    ["<leader>hc"] = {"<cmd>HopChar1<cr>", desc = "Hop to character"},
+    ["<leader>hC"] = {"<cmd>HopChar2<cr>", desc = "Hop to double character"},
     ["<ESC>"] = {""},
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
@@ -65,6 +71,16 @@ return {
     ["<C-Left>"] = { function() require("smart-splits").move_cursor_left() end, desc = "Move to left split" },
     ["<C-Down>"] = { function() require("smart-splits").move_cursor_down() end, desc = "Move to below split" },
     ["<C-Up>"] = { function() require("smart-splits").move_cursor_up() end, desc = "Move to above split" },
+
+    ["<C-s>"] = { "<cmd>w<cr>", desc = "Save File" },
+    ["<C-g>"] = {"<cmd>GpChatToggle<cr>", desc = "Toggle Popup Chat"},
+  },
+  o = {
+    ["<leader>h"] = { name = "", desc = "Hop" },
+    ["<leader>hw"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
+    ["<leader>hl"] = {"<cmd>HopLine<cr>", desc = "Hop to line"},
+    ["<leader>hc"] = {"<cmd>HopChar1<cr>", desc = "Hop to character"},
+    ["<leader>hC"] = {"<cmd>HopChar2<cr>", desc = "Hop to double character"},
   },
   t = {
     -- setting a mapping to false will disable it

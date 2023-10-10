@@ -101,6 +101,11 @@ return {
       require("gp").setup({
         chat_user_prefix = "🗨",
 	      chat_assistant_prefix = "🤖",
+	      chat_confirm_delete = false,
+	    	chat_model = { model = "gpt-3.5-turbo", temperature = 1.1, top_p = 1 },
+     		command_model = { model = "gpt-3.5-turbo", temperature = 1.1, top_p = 1 },
+	      chat_custom_instructions = "When providing code just give the code and don't explain it.\n"
+	              .. "Only provide the raw code without markdown markers.\n",
         hooks = {
           Explain = function(gp, params)
             local template = "I have the following code from {{filename}}:\n\n"
@@ -114,6 +119,13 @@ return {
     end,
   },
 
+  {
+    "smoka7/hop.nvim",
+    cmd = {"HopWord", "HopChar1", "HopChar2", "HopLine"},
+    config = function()
+      require("hop").setup()
+    end,
+  },
 
   {
     "famiu/bufdelete.nvim",
@@ -270,11 +282,29 @@ return {
   },
 
   {
+    'https://git.sr.ht/~soywod/himalaya-vim',
+    cmd = {"Himalaya", "HimalayaToggle"},
+    lazy = false,
+    config = function()
+      vim.g.himalaya_folder_picker = "telescope"
+    end
+  },
+
+  {
     'lervag/vimtex',
     ft = {'tex'},
     config = function ()
-      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = 'Zathura'
+      vim.g.vimtex_view_enabled = 0
+      -- set line wrapping on
+      vim.g.wrap = true,
       vim.cmd([[
+      nmap <Up> gk
+      nmap <Down> gj
+      imap <Up> <C-o>gk
+      imap <Down> <C-o>gj
+      vmap <Up> gk
+      vmap <Down> gj
       nmap <leader>vc :VimtexCompile<CR>
       nmap <leader>vv :VimtexView<CR>
       ]])

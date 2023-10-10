@@ -2,12 +2,12 @@
 return {
   opt = {
     -- set to true or false etc.
-    relativenumber = false, -- sets vim.opt.relativenumber
+    relativenumber = true, -- sets vim.opt.relativenumber
     cursorcolumn = true, -- sets vim.opt.cursorcolumn
     number = true, -- sets vim.opt.number
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-    wrap = false, -- sets vim.opt.wrap
+    wrap = true, -- sets vim.opt.wrap
     -- guicursor='n-v-c:block-Cursor,i-ci-ve:hor25-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100,r-cr-o:hor20-Cursor',
     -- guicursor='n-v-c:block-Cursor,i-ci-ve:hor25-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100,r-cr-o:hor20-Cursor',
 
