@@ -14,6 +14,7 @@ return {
     -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
     -- map shift-u to redo
     ["U"] = { "<cmd>redo<cr>", desc = "Redo" },
+    ["q"] = { "<cmd>w|Bdelete<cr>", desc = "Redo" },
     ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
     ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     -- ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
@@ -33,6 +34,7 @@ return {
     -- add a key mapping for HopWord with the prefix "Hop"
     ["<leader>h"] = { name = "", desc = "Hop" },
     ["<leader>hw"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
+    ["hh"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
     ["<leader>hl"] = {"<cmd>HopLine<cr>", desc = "Hop to line"},
     ["<leader>hc"] = {"<cmd>HopChar1<cr>", desc = "Hop to character"},
     ["<leader>hC"] = {"<cmd>HopChar2<cr>", desc = "Hop to double character"},

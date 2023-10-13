@@ -103,6 +103,10 @@ return {
     --   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left reveal_force_cwd") end, 10)
     -- augroup END
     -- ]]
+    -- disable the q: command
+    
+    vim.cmd('nnoremap q: <Nop>')
+    vim.cmd('cnoremap q: <Nop>')
 
     -- set the file tree to close if it's the last window open - maybe this is no longer needed?
     vim.api.nvim_create_autocmd("QuitPre", {callback = function()
@@ -127,6 +131,23 @@ return {
     vim.api.nvim_create_autocmd("ExitPre", {callback = function()
       functions.close_pane()
     end})
+
+    -- check if eml filetype and if so disable tabline
+    vim.api.nvim_create_autocmd("BufEnter", {
+      callback = function()
+        -- print the filetype
+        local file_extension = vim.fn.expand('%:e')
+        -- check to see if eml appears in the filetype
+        if file_extension == "eml" then
+          vim.opt.showtabline = 0
+        else
+          vim.opt.showtabline = 2
+        end
+      end,
+      group = general,
+      desc = "Disable Tabline for EML",
+    })
+
 
     vim.api.nvim_create_autocmd("BufEnter", {
       callback = function()
