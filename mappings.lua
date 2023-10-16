@@ -66,6 +66,7 @@ return {
 		  s = { "<cmd>GpStop<cr>", "Stop" },
 	  },
 	  ["gt"] = {"<cmd>GpChatToggle<cr>", desc = "Toggle Popup Chat"},
+	  ["go"] = {"<cmd>GpEmail<cr>", desc = "Write an Email Response"},
   },
   i = {
     -- Smart Splits

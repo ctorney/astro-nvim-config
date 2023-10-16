@@ -96,7 +96,7 @@ return {
 
   {
     "robitx/gp.nvim",
-    cmd = {"GpChatNew", "GpChatToggle", "GpChatFinder", "GpExplain"},
+    cmd = {"GpChatNew", "GpChatToggle", "GpChatFinder", "GpExplain","GpEmail"},
     config = function()
       require("gp").setup({
         chat_user_prefix = "🗨",
@@ -112,6 +112,23 @@ return {
             .. "```{{filetype}}\n{{selection}}\n```\n\n"
             .. "Please respond by explaining the code above."
             gp.Prompt(params, gp.Target.popup, nil, gp.config.command_model,
+              template, gp.config.chat_system_prompt)
+          end,
+          Email = function(gp, params)
+            local template = "The text below is from an email chain with the most recent message at the top.\n"
+                  .. "The text of all previous messages start with the > character. \n"
+                  .. "Write an email response to the chain as though you were Colin Torney, "
+                  .. "a Professor of Applied Mathematics. \n\n"
+                  .. "If there is any text at the start that does not begin with > use this text "
+                  .. "as further instruction for the email response. \n"
+                  .. "Return only the text of the email. \n"
+                  .. "Try not to repeat text from the email chain in your response. \n"
+                  .. "Be concise but friendly and sign off with first name only. \n\n"
+                  .. "```{{selection}}\n```\n\n"
+            params.range = 2
+            params.line1 = 1
+            params.line2 = 100
+            gp.Prompt(params, gp.Target.prepend, nil, gp.config.command_model,
               template, gp.config.chat_system_prompt)
           end,
         }
@@ -278,15 +295,6 @@ return {
         nmap <leader>cj <Plug>SlimeCellsNext
         nmap <leader>ck <Plug>SlimeCellsPrev
         ]])
-    end
-  },
-
-  {
-    'https://git.sr.ht/~soywod/himalaya-vim',
-    cmd = {"Himalaya", "HimalayaToggle"},
-    lazy = false,
-    config = function()
-      vim.g.himalaya_folder_picker = "telescope"
     end
   },
 
