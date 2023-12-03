@@ -7,18 +7,8 @@ return {
   -- first key is the mode
   n = {
     -- second key is the lefthand side of the map
-    -- mappings seen under group name "Buffer"
-    -- ["<leader>w"] = { "<cmd>Wezterm<cr>", desc = "New Wezterm terminal" },
-    -- ["<leader>p"] = { "<cmd>Ipython<cr>", desc = "Open ipython" },
-    -- ["<leader>pw"] = { "<cmd>IpythonWindow<cr>", desc = "Open ipython in new window" },
-    -- ["<leader>pc"] = { "<cmd>Ipython close<cr>", desc = "Close ipython" },
     -- map shift-u to redo
     ["U"] = { "<cmd>redo<cr>", desc = "Redo" },
-    ["q"] = { "<cmd>w|Bdelete<cr>", desc = "Redo" },
-    ["<C-tab>"] = { "<cmd>bn<cr>", desc = "Buffer next" },
-    ["<C-S-tab>"] = { "<cmd>bp<cr>", desc = "Buffer previous" },
-    -- ["gt"] = { "<cmd>bn<cr>", desc = "Buffer next" },
-    -- ["["] = { "<cmd>bp<cr>", desc = "Buffer previous" },
     ["<leader>bD"] = {
       function()
         require("astronvim.utils.status").heirline.buffer_picker(function(bufnr) require("astronvim.utils.buffer").close(bufnr) end)
@@ -34,7 +24,7 @@ return {
     -- add a key mapping for HopWord with the prefix "Hop"
     ["<leader>h"] = { name = "", desc = "Hop" },
     ["<leader>hw"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
-    ["hh"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
+    -- ["hh"] = {"<cmd>HopWord<cr>", desc = "Hop to word"},
     ["<leader>hl"] = {"<cmd>HopLine<cr>", desc = "Hop to line"},
     ["<leader>hc"] = {"<cmd>HopChar1<cr>", desc = "Hop to character"},
     ["<leader>hC"] = {"<cmd>HopChar2<cr>", desc = "Hop to double character"},
