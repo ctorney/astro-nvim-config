@@ -3,7 +3,7 @@ return {
   opt = {
     -- set to true or false etc.
     relativenumber = true, -- sets vim.opt.relativenumber
-    cursorcolumn = true, -- sets vim.opt.cursorcolumn
+    cursorcolumn = false, -- sets vim.opt.cursorcolumn
     number = true, -- sets vim.opt.number
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
