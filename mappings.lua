@@ -17,6 +17,7 @@ return {
     },
     -- create key mapping to map alt-f4 to close current buffer
     ["<C-c>"] = { "<cmd>w|Bdelete<cr>", desc = "Close current buffer" },
+    ["<leader>bd>"] = { "<cmd>Bdelete<cr>", desc = "Close current buffer" },
     ["<leader>sl"] = { "<cmd>SlimeSendCurrentLine<cr>", desc = "Send current line" },
     ["<C-S-CR>"] = { "<cmd>SlimeSendCurrentLine<cr><cr>", desc = "Send current line" },
     ["<leader>sf"] = { "<cmd>%SlimeSend<cr>", desc = "Send current file" },

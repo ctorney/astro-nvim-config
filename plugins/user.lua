@@ -26,16 +26,55 @@ return {
   --   end,
   -- },
 
-  {
-    'VonHeikemen/fine-cmdline.nvim',
-    lazy = false,
-    requires = {
-      {'MunifTanjim/nui.nvim'}
-    },
-    config = function()
-      vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true, silent = true})
-    end
+    {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = function(_, opts)
+      local utils = require "astronvim.utils"
+      return utils.extend_tbl(opts, {
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        presets = {
+          bottom_search = false, -- use a classic bottom cmdline for search
+          command_palette = false, -- position the cmdline and popupmenu together
+          long_message_to_split = false, -- long messages will be sent to a split
+          inc_rename = utils.is_available "inc-rename.nvim", -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
+      })
+    end,
+    init = function() vim.g.lsp_handlers_enabled = false end,
   },
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      if not opts.bottom then opts.bottom = {} end
+      table.insert(opts.bottom, {
+        ft = "noice",
+        size = { height = 0.4 },
+        filter = function(_, win) return vim.api.nvim_win_get_config(win).relative == "" end,
+      })
+    end,
+  },
+  -- lazy.nvim
+  -- {
+  --   'VonHeikemen/fine-cmdline.nvim',
+  --   lazy = false,
+  --   requires = {
+  --     {'MunifTanjim/nui.nvim'}
+  --   },
+  --   config = function()
+  --     vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true, silent = true})
+  --   end
+  -- },
 
   {
     'Lilja/zellij.nvim',
@@ -87,57 +126,102 @@ return {
       })
     end,
   },
---   {
-  --   "zbirenbaum/copilot-cmp",
-  --   config = function ()
-  --     require("copilot_cmp").setup()
-  --   end
-  -- },
 
+  -- Lazy
+-- {
+--   "jackMort/ChatGPT.nvim",
+--     event = "VeryLazy",
+--     config = function()
+--       require("chatgpt").setup({
+--   api_key_cmd = nil,
+--     yank_register = "+",
+--     chat = {
+--       welcome_message = [[ 
+--       Welcome to ChatGPT 4. Please ask me a question. -- changed
+--       ]],
+--       }
+--       }
+--       )
+--     end,
+--     dependencies = {
+--       "MunifTanjim/nui.nvim",
+--       "nvim-lua/plenary.nvim",
+--       "nvim-telescope/telescope.nvim"
+--     }
+-- },
   {
-    "robitx/gp.nvim",
+    "ctorney/gp.nvim",
     cmd = {"GpChatNew", "GpChatToggle", "GpChatFinder", "GpExplain","GpEmail"},
     config = function()
       require("gp").setup({
         chat_user_prefix = "🗨",
 	      chat_assistant_prefix = "🤖",
 	      chat_confirm_delete = false,
-	    	chat_model = { model = "gpt-4", temperature = 1.1, top_p = 1 },
-     		command_model = { model = "gpt-4", temperature = 1.1, top_p = 1 },
-	      chat_custom_instructions = "When providing code just give the code and don't explain it.\n"
-	              .. "Only provide the raw code without markdown markers.\n",
-        hooks = {
-          Explain = function(gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
-            .. "```{{filetype}}\n{{selection}}\n```\n\n"
-            .. "Please respond by explaining the code above."
-            gp.Prompt(params, gp.Target.popup, nil, gp.config.command_model,
-              template, gp.config.chat_system_prompt)
-          end,
-          Email = function(gp, params)
-            local template = "The text below is from an email chain with the most recent message at the top.\n"
-                  .. "The text of all previous messages start with the > character. \n"
-                  .. "Write an email response to the chain as though you were Colin Torney, "
-                  .. "a Professor of Applied Mathematics. \n\n"
-                  .. "If there is any text at the start that does not begin with > use this text "
-                  .. "as further instruction for the email response. \n"
-                  .. "Return only the text of the email. \n"
-                  .. "Try not to repeat text from the email chain in your response. \n"
-                  .. "Start the email with Hi and the first name of the recipient and end with Best wishes, Colin. \n"
-                  .. "Compose the response in a terse and very concise style and sign off with first name only. \n\n"
-                  .. "```{{selection}}\n```\n\n"
-            params.range = 2
-            params.line1 = 1
-            params.line2 = 100
-            local chat_model = { model = "gpt-4", temperature = 0.7, top_p = 1 }
-            gp.Prompt(params, gp.Target.prepend, nil, gp.config.command_model,
-              template, gp.config.chat_system_prompt)
-          end,
-        }
+	      style_highlight = "None",
+	      style_popup_border = "rounded",
+	      style_popup_left_margin = 1,
+	      style_popup_title = " ChatGPT 4 ",
+	      style_popup_winhighlight = "Normal:Normal,FloatBorder:Normal,FloatTitle:Normal,WinBar:Normal",
+	      toggle_target = "popup",
+	      agents = {
+          -- Disable ChatGPT 3.5
+          {
+            name = "ChatGPT3-5",
+            chat = false,  -- just name would suffice
+            command = false,   -- just name would suffice
+          },
+          {
+            name = "ChatGPT4",
+            chat = true,
+            command = true,
+            -- string with model name or table with model name and parameters
+            model = { model = "gpt-4-1106-preview", temperature = 1.1, top_p = 1 },
+            -- system prompt (use this to specify the persona/role of the AI)
+            system_prompt = "You are a general AI assistant.\n\n"
+              .. "The user provided the additional info about how they would like you to respond:\n\n"
+              .. "- If you're unsure don't guess and say you don't know instead.\n"
+              .. "- Ask question if you need clarification to provide better answer.\n"
+              .. "- Think deeply and carefully from first principles step by step.\n"
+              .. "- Make your response clear and brief.\n"
+              .. "- Do not give advice unless it has been requested.\n"
+              .. "- If asked for code only provide the code and don't provide any explanation.\n"
+          },
+    },
+	    	-- chat_model = { model = "gpt-4", temperature = 1.1, top_p = 1 },
+     		-- command_model = { model = "gpt-4", temperature = 1.1, top_p = 1 },
+	      -- chat_custom_instructions = "When providing code just give the code and don't explain it.\n"
+	              -- .. "Only provide the raw code without markdown markers.\n",
+        -- hooks = {
+        --   Explain = function(gp, params)
+        --     local template = "I have the following code from {{filename}}:\n\n"
+        --     .. "```{{filetype}}\n{{selection}}\n```\n\n"
+        --     .. "Please respond by explaining the code above."
+        --     gp.Prompt(params, gp.Target.popup, nil, gp.config.command_model,
+        --       template, gp.config.chat_system_prompt)
+        --   end,
+        --   Email = function(gp, params)
+        --     local template = "The text below is from an email chain with the most recent message at the top.\n"
+        --           .. "The text of all previous messages start with the > character. \n"
+        --           .. "Write an email response to the chain as though you were Colin Torney, "
+        --           .. "a Professor of Applied Mathematics. \n\n"
+        --           .. "If there is any text at the start that does not begin with > use this text "
+        --           .. "as further instruction for the email response. \n"
+        --           .. "Return only the text of the email. \n"
+        --           .. "Try not to repeat text from the email chain in your response. \n"
+        --           .. "Start the email with Hi and the first name of the recipient and end with Best wishes, Colin. \n"
+        --           .. "Compose the response in a terse and very concise style and sign off with first name only. \n\n"
+        --           .. "```{{selection}}\n```\n\n"
+        --     params.range = 2
+        --     params.line1 = 1
+        --     params.line2 = 100
+        --     local chat_model = { model = "gpt-4", temperature = 0.7, top_p = 1 }
+        --     gp.Prompt(params, gp.Target.prepend, nil, gp.config.command_model,
+        --       template, gp.config.chat_system_prompt)
+        --   end,
+        -- }
       })
     end,
   },
-
 
   {
     "ggandor/leap.nvim",
@@ -155,14 +239,6 @@ return {
       leap.add_default_mappings(true)
       vim.keymap.del({ "x", "o" }, "x")
       vim.keymap.del({ "x", "o" }, "X")
-    end,
-  },
-
-  {
-    "smoka7/hop.nvim",
-    cmd = {"HopWord", "HopChar1", "HopChar2", "HopLine"},
-    config = function()
-      require("hop").setup()
     end,
   },
 
@@ -366,6 +442,7 @@ return {
       vmap <Down> gj
       nmap <leader>vc :VimtexCompile<CR>
       nmap <leader>vv :VimtexView<CR>
+      nmap <leader>vt :VimtexTocToggle<CR>
       ]])
     end
   },
